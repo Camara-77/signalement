@@ -1,1 +1,202 @@
-<p>formulaire works!</p>
+<div class="container py-5">
+
+    <a routerLink="/" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Retour aux signalements
+    </a>
+
+    <div class="mt-4 mb-4">
+        <h1 class="fw-bold">Nouveau Signalement</h1>
+
+        <p class="text-muted">
+            Participez à l'amélioration de votre ville en signalant un incident ou un besoin d'intervention.
+        </p>
+    </div>
+
+    <!-- Carte Formulaire -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body p-4 p-md-5">
+
+            <form [formGroup]="signalementForm" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+
+                    <!-- COLONNE GAUCHE -->
+                    <div class="col-md-6">
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Nom Complet</label>
+
+                            <input type="text" class="form-control" placeholder="Ex : Aliou Diallo" 
+                                formControlName="nom" name="nom"
+                                [class.is-invalid]="nom?.invalid && nom?.touched"
+                                [class.is-valid]="nom?.valid && nom?.touched">
+
+                                @if (nom?.touched) {
+                                    @if (nom?.errors?.['required']) {
+                                        <small class="invalid-feedback">Le nom est obligatoire.</small>
+                                    }
+                                    @if (nom?.errors?.['minlength']) {
+                                        <small class="invalid-feedback">Minimum 3 caractères.</small>
+                                    }
+                                    @if (nom?.errors?.['maxlength']) {
+                                        <small class="invalid-feedback">Maximum 50 caractères.</small>
+                                    }
+                                    @if (nom?.errors?.['pattern']) {
+                                        <small class="invalid-feedback">Caractères spéciaux non autorisés.</small>
+                                    }
+                                }
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Adresse Email</label>
+                            <input type="email" class="form-control" placeholder="votre adresse email" 
+                                formControlName="email"
+                                [class.is-invalid]="email?.invalid && email?.touched"
+                                [class.is-valid]="email?.valid && email?.touched">
+
+                                @if (email?.touched) {
+                                    @if (email?.errors?.['required']) {
+                                        <small class="invalid-feedback">Email est obligatoire.</small>
+                                    }
+                                    @if (email?.errors?.['email']) {
+                                        <small class="invalid-feedback">Email invalide.</small>
+                                    }
+                                }
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Titre du Signalement</label>
+                            <input type="text" class="form-control" placeholder="Bref résumé de l'incident" 
+                                formControlName="titre" name="titre"
+                                [class.is-invalid]="titre?.invalid && titre?.touched"
+                                [class.is-valid]="titre?.valid && titre?.touched">
+                                @if (titre?.touched) {
+                                    @if (titre?.errors?.['required']) {
+                                        <small class="invalid-feedback">Titre est obligatoire.</small>
+                                    }
+                                    @if (titre?.errors?.['minlength']) {
+                                        <small class="invalid-feedback">Minimum 5 caractères..</small>
+                                    }
+                                    @if (titre?.errors?.['maxlength']) {
+                                        <small class="invalid-feedback">Maximum 100 caractères..</small>
+                                    }
+                                    @if (titre?.errors?.['pattern']) {
+                                        <small class="invalid-feedback">Caractères spéciaux non autorisés.</small>
+                                    }
+                                }
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Photo de l'incident (Optionnel)</label>
+
+                            <div class="border rounded text-center p-5 bg-light">
+                                <i class="bi bi-cloud-arrow-up fs-1 text-secondary"></i>
+                                <p class="mb-0 mt-2">Glissez une image ou cliquez ici</p>
+
+                                <small class="text-muted">PNG, JPG jusqu'à 10MB</small>
+                                <input type="file" class="form-control mt-3" formControlName="image" name="image" accept="image/*">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- COLONNE DROITE -->
+                    <div class="col-md-6">
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">Catégorie</label>
+                            <select class="form-select" name="categorie"
+                                formControlName="categorie"
+                                [class.is-invalid]="categorie?.invalid && categorie?.touched"
+                                [class.is-valid]="categorie?.valid && categorie?.touched">
+                                <option value="">Sélectionner une catégorie</option>
+                                <option value="Voirie">Voirie</option>
+                                <option value="Électricité">Électricité</option>
+                                <option value="Déchets">Déchets</option>
+                                <option value="Sécurité">Sécurité</option>
+                                <option value="Inondation">Inondation</option>
+                            </select>
+                            @if (categorie?.touched) {
+                                @if (categorie?.errors?.['required']) {
+                                    <small class="invalid-feedback">Categorie est obligatoire.</small>
+                                }
+                            }
+                            
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">Localisation</label>
+                            <input type="text" class="form-control" placeholder="Adresse ou lieu précis" name="localisation" 
+                                formControlName="localisation"
+                                [class.is-invalid]="localisation?.invalid && localisation?.touched"
+                                [class.is-valid]="localisation?.valid && localisation?.touched">
+                                @if (localisation?.touched) {
+                                    @if (localisation?.errors?.['required']) {
+                                        <small class="invalid-feedback">localisation est obligatoire.</small>
+                                    }
+                                    @if (localisation?.errors?.['minlength']) {
+                                        <small class="invalid-feedback">Minimum 5 caractères..</small>
+                                    }
+                                    @if (localisation?.errors?.['maxlength']) {
+                                        <small class="invalid-feedback">Maximum 100 caractères..</small>
+                                    }
+                                    @if (localisation?.errors?.['pattern']) {
+                                        <small class="invalid-feedback">Caractères spéciaux non autorisés.</small>
+                                    }
+                                
+                                }
+
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Description détaillée</label>
+                            <textarea rows="8" class="form-control" name="description"
+                                formControlName="description"
+                                [class.is-invalid]="description?.invalid && description?.touched"
+                                [class.is-valid]="description?.valid && description?.touched"
+                                placeholder="Décrivez précisément le problème constaté">
+                            </textarea>
+                            
+                                @if (description?.touched) {
+                                    @if (description?.errors?.['required']) {
+                                        <small class="invalid-feedback">Description est obligatoire.</small>
+                                    }
+                                    @if (description?.errors?.['minlength']) {
+                                        <small class="invalid-feedback">Minimum 20 caractères..</small>
+                                    }
+                                    @if (description?.errors?.['maxlength']) {
+                                        <small class="invalid-feedback">Maximum 255 caractères..</small>
+                                    }
+                                }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex justify-content-center gap-3">
+
+                    <button type="button" class="btn btn-outline-secondary px-4">
+                        Annuler
+                    </button>
+
+                    <button type="submit" class="btn btn-primary px-4" [disabled]="signalementForm.invalid">
+                        Envoyer le signalement
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

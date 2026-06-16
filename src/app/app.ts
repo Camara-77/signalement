@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
+import { Formulaire } from './components/formulaire/formulaire';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [Formulaire],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
