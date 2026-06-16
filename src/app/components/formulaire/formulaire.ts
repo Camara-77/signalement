@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { Signalement, SignalementService } from '../../services/signalement.service';
 
 @Component({
   selector: 'app-formulaire',
@@ -11,11 +12,15 @@ import { Router, RouterLink } from '@angular/router';
 export class Formulaire {
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder) {}
+    private formBuilder: FormBuilder,
+    private signalementService: SignalementService,
+  ) {}
 
+  // permet de lier la logique typescript au formulaire html
   signalementForm!: FormGroup;
 
   ngOnInit(): void {
+      // creation des champs du formulaire et la validation des inputs
       this.signalementForm = this.formBuilder.group({
         nom: ['', [
           Validators.required,
@@ -46,7 +51,7 @@ export class Formulaire {
     });
   }
 
-  // Getters
+  // Getters permet d'eviter un code plus verbeux dans le template html sur l'affichage des erreurs
   get nom(){ return this.signalementForm.get('nom') }
   get email(){ return this.signalementForm.get('email') }
   get titre(){ return this.signalementForm.get('titre') }
@@ -56,15 +61,29 @@ export class Formulaire {
   get description(){ return this.signalementForm.get('description') }
 
   onSubmit(): void{
+    //verifier si le formulaire est bien remplie
     if (this.signalementForm.invalid) {
       return;
     }
 
-    // this.signalementForm.reset();
+    // ahouter un nouveau signal dans le tableau signalement
+    const nouveauSignal: Signalement = {
+      id: Date.now(),
+      ...this.signalementForm.value,
+      votes: 0,
+      date: new Date().toDateString()
+    };
 
-    // this.router.navigate(['/']);
+    this.signalementService.addSignalement(nouveauSignal);
 
     console.log(this.signalementForm.value);
+
+    // vider le formulaire
+    this.signalementForm.reset();
+
+    // rediriger vers la page liste signalement
+    this.router.navigate(['/']);
+
   }
 
 }
