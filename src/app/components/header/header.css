@@ -1,0 +1,19 @@
+
+
+
+.notify{
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}
+
+.logo{
+  display: flex;
+  gap: 8px;
+}
+
+
+i{
+  margin-top: 6px;
+  color: white;
+}
