@@ -9,26 +9,32 @@
 
     <!-- Contenu principal -->
     <div class="col-lg-9">
-
-      <img
+      @if(signalementDetail?.image){
+        <img
+        [src]="signalementDetail?.image"
+        class="img-fluid rounded-4 w-100"
+        style="height:450px; object-fit:cover;">
+      } @else {
+        <img
         src="https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg"
         class="img-fluid rounded-4 w-100"
-        style="height:450px; object-fit:cover;"
-      >
+        style="height:450px; object-fit:cover;">
+      }
+
 
       <div class="d-flex align-items-center gap-3 mt-3">
         <span class="badge text-bg-light text-secondary">
-          VOIRIE
+          {{signalementDetail?.categorie}}
         </span>
 
         <small class="text-secondary">
           <i class="fa-regular fa-calendar me-1"></i>
-          Publié le 12 Mars 2026
+          {{signalementDetail?.date}}
         </small>
       </div>
 
       <h1 class="fw-bold mt-4">
-        Nid-de-poule dangereux sur la chaussée principale
+        {{signalementDetail?.titre}}
       </h1>
 
       <hr>
@@ -38,14 +44,14 @@
           <small class="text-uppercase text-secondary fw-semibold">
             Localisation
           </small>
-          <h5>24 Rue de la Liberté, Secteur Nord</h5>
+          <h5>{{signalementDetail?.localisation}}</h5>
         </div>
 
         <div class="col-md-6">
           <small class="text-uppercase text-secondary fw-semibold">
             Signalé par
           </small>
-          <h5>Jean Dupond</h5>
+          <h5>{{signalementDetail?.nom}}</h5>
         </div>
       </div>
 
@@ -54,8 +60,7 @@
       <h4 class="fw-bold mb-3">Description détaillée</h4>
 
       <p class="text-secondary lh-lg">
-        Un nid-de-poule très profond est apparu au milieu de la voie de circulation.
-        Il est particulièrement dangereux pour les cyclistes et les deux-roues...
+        {{signalementDetail?.description}}
       </p>
 
     </div>
@@ -69,7 +74,7 @@
           <div class="d-flex justify-content-between align-items-center">
 
             <div>
-              <h2 class="fw-bold mb-0">42</h2>
+              <h2 class="fw-bold mb-0">{{signalementDetail?.votes}}</h2>
               <small class="text-secondary">
                 Soutiens citoyens
               </small>
@@ -81,7 +86,7 @@
 
           </div>
 
-          <button class="btn btn-primary w-100 mt-4 rounded-3">
+          <button class="btn btn-primary w-100 mt-4 rounded-3" (click)="onSoutenir()">
             <i class="fa-solid fa-heart me-2"></i>
             Soutenir cette cause
           </button>

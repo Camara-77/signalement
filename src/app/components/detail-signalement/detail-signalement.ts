@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Signalement, SignalementService } from '../../services/signalement.service';
 
@@ -10,21 +10,21 @@ import { Signalement, SignalementService } from '../../services/signalement.serv
 })
 export class DetailSignalement implements OnInit {
   constructor(
-    private route: ActivatedRoute, 
-    private signalementService: SignalementService
-  ) {
-    
-  }
+    private route: ActivatedRoute,
+    private signalementService: SignalementService,
+  ) {}
 
-  signalementDetail!: Signalement | undefined;
+  signalementDetail?: Signalement;
 
   ngOnInit(): void {
     const detailId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(detailId);
-    
-    this.signalementDetail = this.signalementService.getSignalementById(detailId)
 
+    this.signalementDetail = this.signalementService.getSignalementById(detailId);
   }
 
-  
+  onSoutenir(): void {
+    if (!this.signalementDetail) return;
+
+    this.signalementService.incrementerVotes(this.signalementDetail.id);
+  }
 }

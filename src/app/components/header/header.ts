@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SignalementService } from '../../services/signalement.service';
+
 
 @Component({
   selector: 'app-header',
@@ -6,6 +8,16 @@ import { Component, Input } from '@angular/core';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {
-  
+export class Header implements OnInit{
+
+    total = 0
+  constructor(private service:SignalementService){
+
+  };
+
+  ngOnInit(): void {
+    this.total  =this.service.onCompter()
+   
+  }
+
 }

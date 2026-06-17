@@ -17,21 +17,15 @@
   <!-- Recherche + Filtres -->
   <div class="row mb-4 g-3">
 
-    <div class="col-md-7">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Rechercher par mot-clé, rue ou catégorie..."
-      >
-    </div>
-
     <div class="col-md-5">
-      <div class="btn-group w-100">
-        <button class="btn btn-outline-secondary active">Tout</button>
-        <button class="btn btn-outline-secondary">Voirie</button>
-        <button class="btn btn-outline-secondary">Éclairage</button>
-        <button class="btn btn-outline-secondary">Déchets</button>
-        <button class="btn btn-outline-secondary">Sécurité</button>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-dark" (click)="filtrerParCategorie('')">Tout</button>
+        <button class="btn btn-outline-secondary" (click)="filtrerParCategorie('Voirie')">Voirie</button>
+        <button class="btn btn-outline-warning" (click)="filtrerParCategorie('Électricité')">Électricité</button>
+        <button class="btn btn-outline-success" (click)="filtrerParCategorie('Déchets')">Déchets</button>
+        <button class="btn btn-outline-danger" (click)="filtrerParCategorie('Sécurité')">Sécurité</button>
+        <button class="btn btn-outline-primary" (click)="filtrerParCategorie('Innondation')">Innondation</button>
       </div>
     </div>
 
@@ -40,9 +34,9 @@
   <!-- Liste des incidents -->
   <div class="row g-4">
 
-    @for (signalement of listeSignalement; track signalement.id) {
+    @for (signalement of signalementsFiltres; track signalement.id) {
         <div class="col-md-4">
-            <app-carte-signalement [signalement]="signalement" (soutenirEvent)="onSoutenir($event)" />
+            <app-carte-signalement [signalement]="signalement" (soutenirEvent)="onSoutenir($event)" (supprimerCard)="onSupprimer($event)"/>
         </div>
     }@empty {
         <div class="col-12">

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core"
 
 export interface Signalement{
     id:number,
-    nomComplet: string,
+    nom: string,
     localisation: string,
     email: string,
     titre: string,
@@ -10,7 +10,8 @@ export interface Signalement{
     description: string,
     image?:string,
     votes:number,
-    date: Date
+    date: Date,
+
 }
 
 @Injectable({
@@ -23,6 +24,7 @@ export class SignalementService{
 
     constructor() {
     this.chargerSignalement();
+    this.onCompter()
   }
 
 //   fonction pou recuperer tous les signalements
@@ -49,7 +51,7 @@ export class SignalementService{
   }
 
   // recuperer un signalement a partir de son id
-  getSignalementById(id: number): Signalement | undefined { 
+  getSignalementById(id: number): Signalement | undefined {
     return this.signalements.find(s => s.id === id);
   }
 
@@ -62,5 +64,20 @@ export class SignalementService{
     localStorage.setItem('signalements', JSON.stringify(this.signalements));
   }
 }
-    
+
+
+  onCompter(): number{
+    return this.signalements.length
+
+  }
+
+  supprimerSignalement(id: number): void {
+  this.signalements = this.signalements.filter(
+    s => s.id !== id
+  );
+   localStorage.setItem(
+    'signalements',
+    JSON.stringify(this.signalements)
+  );
+}
 }

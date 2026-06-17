@@ -14,10 +14,15 @@ export class CarteSignalement {
   // L'enfant déclare qu'il peut émettre un événement nommé "soutenirEvent"
   // <number> = la donnée transmise sera l'id du signalement concerné
   @Output() soutenirEvent = new EventEmitter<number>();
+  @Output() supprimerCard = new EventEmitter<number>()
+
+   supprimer(): void{
+    this.supprimerCard.emit(this.signalement.id)
+  }
 
   onClicSoutenir(): void {
     // L'enfant émet juste l'événement avec l'id concerné
-    
+
     this.soutenirEvent.emit(this.signalement.id);
   }
 
