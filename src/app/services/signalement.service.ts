@@ -47,5 +47,10 @@ export class SignalementService{
       this.signalements = JSON.parse(data);
     }
   }
+
+  // recuperer un signalement a partir de son id
+  getSignalementById(id: number): Signalement | undefined { 
+    return this.signalements[id];
+  }
     
 }

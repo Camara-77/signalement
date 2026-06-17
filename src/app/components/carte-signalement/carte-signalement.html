@@ -1,1 +1,58 @@
-<p>carte-signalement works!</p>
+<div
+  class="card h-100 border-start border-4 shadow-sm"
+  [ngClass]="getCategorieBorderClass()"
+>
+
+  @if (signalement.image) {
+    <img [src]="signalement.image" class="card-img-top" alt="Photo du signalement">
+  } @else {
+    <img src="https://placehold.co/600x300" class="card-img-top" alt="Photo du signalement">
+  }
+
+  <div class="card-body pb-0">
+
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span class="badge rounded-2" [ngClass]="getCategorieClass()">
+        {{ signalement.categorie }}
+      </span>
+
+      <small class="text-muted">
+        {{ signalement.date }}
+      </small>
+    </div>
+
+    <h5 class="card-title mb-1">
+      {{ signalement.titre }}
+    </h5>
+
+    <p class="text-muted small mb-2 d-flex align-items-center gap-1">
+      <i class="bi bi-geo-alt"></i>
+      {{ signalement.localisation }}
+    </p>
+
+    <p class="card-text text-secondary small">
+      {{ signalement.description }}
+    </p>
+
+  </div>
+
+  <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center">
+
+    <span class="text-danger d-flex align-items-center gap-1">
+      <i class="bi bi-heart-fill"></i>
+      {{ signalement.votes }}
+    </span>
+
+    <div class="d-flex gap-2">
+      <button [routerLink]="['/signalement/detail/', signalement.id]" class="btn btn-outline-dark btn-sm">
+        Détails
+      </button>
+
+      <button (click)="soutenir()" class="btn btn-primary btn-sm">
+        Soutenir
+      </button>
+    </div>
+
+  </div>
+
+</div>

@@ -40,30 +40,24 @@
   <!-- Statistiques -->
   <div class="row g-3 mb-5">
 
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body text-center">
-          <h6 class="text-muted">Total signalements</h6>
-          <h2>1284</h2>
-        </div>
+    <div class="col-md-2">
+      <div class="badge bg-white text-muted p-2 rounded-2 d-flex flex-column align-items-center">
+        <h4 class="mb-0 text-primary">120</h4>
+        <small>Signalements Totaux</small>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body text-center">
-          <h6 class="text-muted">Signalements actifs</h6>
-          <h2>387</h2>
-        </div>
+    <div class="col-md-2">
+      <div class="badge bg-white text-muted p-2 rounded-2 d-flex flex-column align-items-center">
+        <h4 class="mb-0 text-primary">120</h4>
+        <small>Signalements Totaux</small>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body text-center">
-          <h6 class="text-muted">Total soutiens</h6>
-          <h2>1245</h2>
-        </div>
+    <div class="col-md-2">
+      <div class="badge bg-white text-muted p-2 rounded-2 d-flex flex-column align-items-center">
+        <h4 class="mb-0 text-primary">120</h4>
+        <small>Signalements Totaux</small>
       </div>
     </div>
 
@@ -72,69 +66,18 @@
   <!-- Liste des incidents -->
   <div class="row g-4">
 
-    <!-- Carte 1 -->
-    <div class="col-md-4">
-
-      <div class="card h-100 shadow-sm">
-
-        <img
-          src="https://placehold.co/600x300"
-          class="card-img-top"
-          alt=""
-        >
-
-        <div class="card-body">
-
-          <div class="d-flex justify-content-between mb-2">
-            <span class="badge bg-secondary">
-              Voirie
-            </span>
-
-            <small class="text-muted">
-              Il y a 2 heures
-            </small>
-          </div>
-
-          <h5 class="card-title">
-            Nid-de-poule dangereux
-          </h5>
-
-          <p class="text-muted">
-            24 Rue de la Liberté
-          </p>
-
-          <p class="card-text">
-            Un trou important s'est formé au milieu de la chaussée...
-          </p>
-
+    @for (signalement of listeSignalement; track signalement.id) {
+        <div class="col-md-4">
+            <app-carte-signalement [signalement]="signalement" />
         </div>
-
-        <div
-          class="card-footer bg-white d-flex justify-content-between align-items-center"
-        >
-
-          <span class="text-danger">
-            ❤️ 42
-          </span>
-
-          <div class="d-flex gap-2">
-            <button class="btn btn-outline-dark">
-              Détails
-            </button>
-
-            <button class="btn btn-primary">
-              Soutenir
-            </button>
-          </div>
-
+    }@empty {
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                Aucun signalement trouvé.
+            </div>
         </div>
-
-      </div>
-
-    </div>
+    }
 
   </div>
-
- 
 
 </div>

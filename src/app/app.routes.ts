@@ -6,5 +6,5 @@ import { DetailSignalement } from './components/detail-signalement/detail-signal
 export const routes: Routes = [
     {path: '', component: ListeSignalement},
     {path: 'signalement/creer', component: Formulaire},
-    {path: 'detail/:id', component: DetailSignalement}
+    {path: 'signalement/detail/:id', component: DetailSignalement}
 ];
