@@ -1,59 +1,98 @@
-# PlateformeDeSignalement
+# Signalement Citoyen
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.1.
+## 1. Présentation du projet
 
-## Development server
+Signalement Citoyen est une application web développée avec Angular qui permet aux habitants de Dakar de déclarer des incidents urbains (nid-de-poule, lampadaire cassé, dépôt de déchets, problème de sécurité, inondation, etc.) directement en ligne, sans passer par un appel téléphonique à la mairie. Chaque citoyen peut consulter la liste des signalements existants, filtrer par catégorie, soutenir une cause en votant, créer un nouveau signalement via un formulaire strictement validé, et consulter le détail d'un incident. L'objectif est de fournir à la municipalité une base de données fiable, structurée et exploitable des problèmes signalés sur le terrain.
 
-To start a local development server, run:
+## 2. Installation et lancement
+
+Assurez-vous d'avoir [Node.js](https://nodejs.org/) (version 18 ou supérieure) et [Angular CLI](https://angular.dev/tools/cli) installés sur votre machine.
 
 ```bash
+# 1. Cloner le dépôt
+git clone https://github.com/Camara-77/signalement.git
+
+# 2. Se déplacer dans le dossier du projet
+cd signalement
+
+# 3. Installer les dépendances
+npm install
+
+# 4. Lancer le serveur de développement
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+L'application est ensuite accessible à l'adresse : **http://localhost:4200**
 
-## Code scaffolding
+## 3. Architecture et découpage
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+L'application est organisée autour de 3 pages principales (composants routés) et de composants enfants réutilisables.
 
-```bash
-ng generate component component-name
-```
+App (composant racine)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+│
+├── Header  → Barre de navigation, présente sur toutes les pages
+│
+├── ListeSignalement → route "/" — Composant Parent
 
-```bash
-ng generate --help
-```
+│   ├── CarteSignalement → Composant Enfant, répété pour chaque signalement
 
-## Building
+│   │  Reçoit les données via @Input()
 
-To build the project run:
+│   │  Émet l'action "Soutenir" via @Output()
 
-```bash
-ng build
-```
+│   └── Filtre par catégorie → géré directement dans ListeSignalement
+|
+├── NewSignalement → route "/signalement/creer"
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+│   └── Formulaire réactif (Reactive Forms) de création d'un signalement
+|
+└── DetailSignalement → route "/signalement/detail/:id"
 
-## Running unit tests
+└── Affiche le détail complet d'un signalement à partir de son identifiant
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+**Relation Parent / Enfant**
 
-```bash
-ng test
-```
+- **`ListeSignalement`** est le composant **Parent**. Il récupère la liste complète des signalements via le service, gère le filtre par catégorie, et transmet **un seul signalement à la fois** à chaque composant enfant généré dans la boucle d'affichage.
+- **`CarteSignalement`** est le composant **Enfant**. Il ne connaît qu'un signalement (reçu via `@Input() signalement`) et ne modifie jamais directement la donnée. Quand l'utilisateur clique sur "Soutenir", il émet un événement (`@Output() soutenirEvent`) que le parent écoute pour déclencher l'incrémentation réelle du vote via le service.
 
-## Running end-to-end tests
+## 4. Gestion de la donnée
 
-For end-to-end (e2e) testing, run:
+Toutes les données de l'application sont centralisées dans **`SignalementService`** (`src/app/services/signalement.service.ts`), un service Angular fourni en singleton (`@Injectable({ providedIn: 'root' })`) et partagé par l'ensemble des composants.
 
-```bash
-ng e2e
-```
+Ce service est responsable de :
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- la création des signalements (`addSignalement`)
+- la récupération de tous les signalements (`getSignalements`)
+- la récupération d'un signalement précis par son identifiant (`getSignalementById`)
+- la suppression d'un signalement (`supprimerSignalement`)
+- l'incrémentation du nombre de votes d'un signalement (`incrementerVotes`)
 
-## Additional Resources
+La persistance des données est assurée par le **`localStorage`** du navigateur : chaque ajout, suppression ou vote est immédiatement sauvegardé sous la clé `signalements`, ce qui garantit que les données restent disponibles même après un rafraîchissement de la page. Aucune base de données externe ni API backend n'est utilisée dans cette version du projet.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 5. Fonctionnalités principales
+
+- Affichage de la liste des signalements sous forme de cartes
+- Filtrage des signalements par catégorie (Voirie, Électricité, Déchets, Sécurité, Inondation)
+- Création d'un signalement via un formulaire réactif (Reactive Forms) avec validation stricte des champs
+- Consultation du détail d'un signalement
+- Système de soutien (votes) par signalement, communication Enfant → Parent via `@Output()`
+- Suppression d'un signalement
+- Persistance des données via `localStorage`
+
+## 6. Stack technique
+
+- **Angular** (Standalone Components, Reactive Forms, Router)
+- **TypeScript**
+- **Bootstrap 5** pour le style et la mise en page
+- **Fontawesome** pour les icônes
+
+## 7. Démo et déploiement
+
+- **Dépôt GitHub** : [https://github.com/Camara-77/signalement](https://github.com/Camara-77/signalement)
+- **Application en ligne** : *à compléter après déploiement (Vercel ou Netlify)*
+- **Vidéo de démonstration** : *à compléter*
+
+## 8. Wireframe
+
+*Insérer ici une image ou un schéma simple des 3 pages principales (liste, formulaire, détail).*

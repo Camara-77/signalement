@@ -2,9 +2,9 @@
   class="card h-100 border-start border-4 shadow-sm">
 
   @if (signalement.image) {
-    <img [src]="signalement.image" class="card-img-top" alt="Photo du signalement">
+    <img [src]="signalement.image" class="card-img-top h-50" alt="Photo du signalement">
   } @else {
-    <img src="https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg" class="card-img-top" alt="Photo du signalement">
+    <img src="https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg" class="card-img-top h-50" alt="Photo du signalement">
   }
 
   <div class="card-body pb-0">
@@ -15,6 +15,7 @@
       </span>
 
       <small class="text-muted">
+        <i class="fa-solid fa-calendar"></i>
         {{ signalement.date }}
       </small>
     </div>
@@ -24,7 +25,7 @@
     </h5>
 
     <p class="text-muted small mb-2 d-flex align-items-center gap-1">
-      <i class="bi bi-geo-alt"></i>
+      <i class="fa-solid fa-location-dot"></i>
       {{ signalement.localisation }}
     </p>
 

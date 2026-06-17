@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Signalement } from '../../services/signalement.service';
-import { NgClass } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { RouterLink } from "@angular/router";
 
 @Component({

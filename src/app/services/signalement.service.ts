@@ -72,12 +72,7 @@ export class SignalementService{
   }
 
   supprimerSignalement(id: number): void {
-  this.signalements = this.signalements.filter(
-    s => s.id !== id
-  );
-   localStorage.setItem(
-    'signalements',
-    JSON.stringify(this.signalements)
-  );
+  this.signalements = this.signalements.filter(s => s.id !== id);
+  localStorage.setItem('signalements',JSON.stringify(this.signalements));
 }
 }

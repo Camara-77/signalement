@@ -1,101 +1,104 @@
 <div class="container py-4 ">
 
-  <button class="btn btn-link text-decoration-none text-secondary ps-0">
-    <i class="fa-solid fa-arrow-left me-2"></i>
-    Retour aux signalements
-  </button>
+    <button routerLink="/" class="btn btn-link text-decoration-none text-secondary ps-0">
+        <i class="fa-solid fa-arrow-left me-2"></i>
+        Retour aux signalements
+    </button>
+    @if (signalementDetail) {
+    <div class="row g-4">
 
-  <div class="row g-4">
-
-    <!-- Contenu principal -->
-    <div class="col-lg-9">
-      @if(signalementDetail?.image){
-        <img
-        [src]="signalementDetail?.image"
-        class="img-fluid rounded-4 w-100"
-        style="height:450px; object-fit:cover;">
-      } @else {
-        <img
-        src="https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg"
-        class="img-fluid rounded-4 w-100"
-        style="height:450px; object-fit:cover;">
-      }
+        <!-- Contenu principal -->
+        <div class="col-lg-9">
+            @if(signalementDetail?.image){
+            <img [src]="signalementDetail?.image" class="img-fluid rounded-4 w-100"
+                style="height:450px; object-fit:cover;">
+            } @else {
+            <img src="https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg"
+                class="img-fluid rounded-4 w-100" style="height:450px; object-fit:cover;">
+            }
 
 
-      <div class="d-flex align-items-center gap-3 mt-3">
-        <span class="badge text-bg-light text-secondary">
-          {{signalementDetail?.categorie}}
-        </span>
+            <div class="d-flex align-items-center gap-3 mt-3">
+                <span class="badge rounded-2" [ngClass]="getCategorieClass()">
+                    {{signalementDetail?.categorie}}
+                </span>
 
-        <small class="text-secondary">
-          <i class="fa-regular fa-calendar me-1"></i>
-          {{signalementDetail?.date}}
-        </small>
-      </div>
-
-      <h1 class="fw-bold mt-4">
-        {{signalementDetail?.titre}}
-      </h1>
-
-      <hr>
-
-      <div class="row py-3">
-        <div class="col-md-6">
-          <small class="text-uppercase text-secondary fw-semibold">
-            Localisation
-          </small>
-          <h5>{{signalementDetail?.localisation}}</h5>
-        </div>
-
-        <div class="col-md-6">
-          <small class="text-uppercase text-secondary fw-semibold">
-            Signalé par
-          </small>
-          <h5>{{signalementDetail?.nom}}</h5>
-        </div>
-      </div>
-
-      <hr>
-
-      <h4 class="fw-bold mb-3">Description détaillée</h4>
-
-      <p class="text-secondary lh-lg">
-        {{signalementDetail?.description}}
-      </p>
-
-    </div>
-
-    <!-- Carte soutien -->
-    <div class="col-lg-3">
-
-      <div class="card border-0 shadow-sm rounded-4">
-        <div class="card-body">
-
-          <div class="d-flex justify-content-between align-items-center">
-
-            <div>
-              <h2 class="fw-bold mb-0">{{signalementDetail?.votes}}</h2>
-              <small class="text-secondary">
-                Soutiens citoyens
-              </small>
+                <small class="text-secondary">
+                    <i class="fa-regular fa-calendar me-1"></i>
+                    {{signalementDetail?.date}}
+                </small>
             </div>
 
-            <button class="btn btn-light rounded-circle">
-              <i class="fa-solid fa-heart"></i>
-            </button>
+            <h1 class="fw-bold mt-4">
+                {{signalementDetail?.titre}}
+            </h1>
 
-          </div>
+            <hr>
 
-          <button class="btn btn-primary w-100 mt-4 rounded-3" (click)="onSoutenir()">
-            <i class="fa-solid fa-heart me-2"></i>
-            Soutenir cette cause
-          </button>
+            <div class="row py-3">
+                <div class="col-md-6">
+                    <small class="text-uppercase text-secondary fw-semibold">
+                        Localisation
+                    </small>
+                    <h5>{{signalementDetail?.localisation}}</h5>
+                </div>
+
+                <div class="col-md-6">
+                    <small class="text-uppercase text-secondary fw-semibold">
+                        Signalé par
+                    </small>
+                    <h5>{{signalementDetail?.nom}}</h5>
+                </div>
+            </div>
+
+            <hr>
+
+            <h4 class="fw-bold mb-3">Description détaillée</h4>
+
+            <p class="text-secondary lh-lg">
+                {{signalementDetail?.description}}
+            </p>
 
         </div>
-      </div>
+
+        <!-- Carte soutien -->
+        <div class="col-lg-3">
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <h2 class="fw-bold mb-0">{{signalementDetail?.votes}}</h2>
+                            <small class="text-secondary">
+                                Soutiens citoyens
+                            </small>
+                        </div>
+
+                        <button class="btn btn-light rounded-circle">
+                            <i class="fa-solid fa-heart text-danger"></i>
+                        </button>
+
+                    </div>
+
+                    <button class="btn btn-primary w-100 mt-4 rounded-3" (click)="onSoutenir()">
+                        Soutenir cette cause
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
 
     </div>
+    }@else {
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            Aucun signalement trouvé.
+        </div>
+    </div>
+    }
 
-  </div>
 
 </div>

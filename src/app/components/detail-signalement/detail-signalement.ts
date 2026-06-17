@@ -1,10 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Signalement, SignalementService } from '../../services/signalement.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-detail-signalement',
-  imports: [],
+  imports: [RouterLink, NgClass],
   templateUrl: './detail-signalement.html',
   styleUrl: './detail-signalement.css',
 })
@@ -26,5 +27,16 @@ export class DetailSignalement implements OnInit {
     if (!this.signalementDetail) return;
 
     this.signalementService.incrementerVotes(this.signalementDetail.id);
+  }
+
+  getCategorieClass(): string {
+    switch (this.signalementDetail?.categorie) {
+      case 'Voirie': return 'bg-secondary';
+      case 'Électricité': return 'bg-warning';
+      case 'Déchets': return 'bg-success';
+      case 'Sécurité': return 'bg-danger';
+      case 'Inondation': return 'bg-primary';
+      default: return 'bg-dark';
+    }
   }
 }
