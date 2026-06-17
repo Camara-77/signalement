@@ -28,6 +28,7 @@ L'application est ensuite accessible à l'adresse : **http://localhost:4200**
 
 L'application est organisée autour de 3 pages principales (composants routés) et de composants enfants réutilisables.
 
+```bash
 App (composant racine)
 
 │
@@ -51,6 +52,7 @@ App (composant racine)
 
 └── Affiche le détail complet d'un signalement à partir de son identifiant
 
+```
 **Relation Parent / Enfant**
 
 - **`ListeSignalement`** est le composant **Parent**. Il récupère la liste complète des signalements via le service, gère le filtre par catégorie, et transmet **un seul signalement à la fois** à chaque composant enfant généré dans la boucle d'affichage.
@@ -93,6 +95,11 @@ La persistance des données est assurée par le **`localStorage`** du navigateur
 - **Application en ligne** : *à compléter après déploiement (Vercel ou Netlify)*
 - **Vidéo de démonstration** : *à compléter*
 
-## 8. Wireframe
+## 8. Equipe
+- Aliou DIALLO
+- Aissatou Combe CAMARA
+- Fatoumata DRAME
+
+## 9. Wireframe
 
 *Insérer ici une image ou un schéma simple des 3 pages principales (liste, formulaire, détail).*
