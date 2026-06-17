@@ -28,18 +28,16 @@ export class CarteSignalement {
       }
   }
 
-  // Cette méthode retourne la bonne classe CSS selon la catégorie
- 
   // Couleur du badge — utilise les variantes "subtle" de Bootstrap
   // (fond pastel + texte foncé assorti, meilleur contraste que bg-warning classique)
   getCategorieClass(): string {
     switch (this.signalement.categorie) {
-      case 'Voirie': return 'text-bg-secondary';
-      case 'Électricité': return 'bg-warning-subtle text-warning-emphasis';
-      case 'Déchets': return 'bg-success-subtle text-success-emphasis';
-      case 'Sécurité': return 'bg-danger-subtle text-danger-emphasis';
-      case 'Inondation': return 'bg-primary-subtle text-primary-emphasis';
-      default: return 'bg-dark-subtle text-dark-emphasis';
+      case 'Voirie': return 'bg-secondary';
+      case 'Électricité': return 'bg-warning';
+      case 'Déchets': return 'bg-success';
+      case 'Sécurité': return 'bg-danger';
+      case 'Inondation': return 'bg-primary';
+      default: return 'bg-dark';
     }
   }
 
