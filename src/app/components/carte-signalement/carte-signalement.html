@@ -1,6 +1,5 @@
 <div
-  class="card h-100 border-start border-4 shadow-sm" [ngClass]="getCategorieBorderClass()"
->
+  class="card h-100 border-start border-4 shadow-sm">
 
   @if (signalement.image) {
     <img [src]="signalement.image" class="card-img-top" alt="Photo du signalement">
@@ -47,7 +46,7 @@
         Détails
       </button>
 
-      <button (click)="soutenir()" class="btn btn-primary btn-sm">
+      <button (click)="onClicSoutenir()" class="btn btn-primary btn-sm">
         Soutenir
       </button>
     </div>

@@ -50,7 +50,17 @@ export class SignalementService{
 
   // recuperer un signalement a partir de son id
   getSignalementById(id: number): Signalement | undefined { 
-    return this.signalements[id];
+    return this.signalements.find(s => s.id === id);
   }
+
+
+  incrementerVotes(id: number): void {
+  const signalement = this.signalements.find(s => s.id === id);
+
+  if (signalement) {
+    signalement.votes++;
+    localStorage.setItem('signalements', JSON.stringify(this.signalements));
+  }
+}
     
 }

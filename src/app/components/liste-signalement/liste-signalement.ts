@@ -21,4 +21,8 @@ export class ListeSignalement implements OnInit{
     this.listeSignalement = this.signalementService.getSignalements()
   }
 
+  onSoutenir(id: number): void {
+    this.signalementService.incrementerVotes(id);
+  }
+
 }

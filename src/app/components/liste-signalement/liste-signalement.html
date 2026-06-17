@@ -42,7 +42,7 @@
 
     @for (signalement of listeSignalement; track signalement.id) {
         <div class="col-md-4">
-            <app-carte-signalement [signalement]="signalement" />
+            <app-carte-signalement [signalement]="signalement" (soutenirEvent)="onSoutenir($event)" />
         </div>
     }@empty {
         <div class="col-12">
