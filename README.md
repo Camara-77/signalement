@@ -92,7 +92,7 @@ La persistance des données est assurée par le **`localStorage`** du navigateur
 ## 7. Démo et déploiement
 
 - **Dépôt GitHub** : [https://github.com/Camara-77/signalement](https://github.com/Camara-77/signalement)
-- **Application en ligne** : *à compléter après déploiement (Vercel ou Netlify)*
+- **Application en ligne** : [https://civic-tech-one.vercel.app/]
 
 ## 8. Equipe
 - Aliou DIALLO
