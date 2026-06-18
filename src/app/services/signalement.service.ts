@@ -11,7 +11,6 @@ export interface Signalement{
     image?:string,
     votes:number,
     date: Date,
-
 }
 
 @Injectable({
@@ -27,17 +26,17 @@ export class SignalementService{
     this.onCompter()
   }
 
-//   fonction pou recuperer tous les signalements
+  // fonction pou recuperer tous les signalements
   getSignalements(): Signalement[] {
     return this.signalements;
   }
 
-//   ajouter un nouveau signalement depuis le formulaire
+  // ajouter un nouveau signalement depuis le formulaire
   addSignalement(signalement: Signalement): void {
 
     this.signalements.push(signalement);
 
-    localStorage.setItem('signalements', JSON.stringify(this.signalements));
+    this.sauvegarder()
   }
 
   // recuperer les signalement depuis le loalStorage
@@ -50,29 +49,36 @@ export class SignalementService{
     }
   }
 
+  // sauvegarder dans le localStorage
+  sauvegarder(): void{
+    localStorage.setItem('signalements', JSON.stringify(this.signalements));
+  }
+
   // recuperer un signalement a partir de son id
   getSignalementById(id: number): Signalement | undefined {
     return this.signalements.find(s => s.id === id);
   }
 
 
+  // incrementer le vote des soutiens
   incrementerVotes(id: number): void {
   const signalement = this.signalements.find(s => s.id === id);
 
   if (signalement) {
     signalement.votes++;
-    localStorage.setItem('signalements', JSON.stringify(this.signalements));
+    this.sauvegarder()
   }
 }
 
-
+  // compter le nombre de signalements
   onCompter(): number{
     return this.signalements.length
 
   }
 
+  // supprimer un signalement
   supprimerSignalement(id: number): void {
-  this.signalements = this.signalements.filter(s => s.id !== id);
-  localStorage.setItem('signalements',JSON.stringify(this.signalements));
-}
+    this.signalements = this.signalements.filter(s => s.id !== id);
+    this.sauvegarder()
+  }
 }

@@ -1,49 +1,79 @@
 <div class="container py-4">
 
-  <!-- Header -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <!-- HEADER -->
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
+
     <div>
-      <h1 class="fw-bold">Tableau de Bord</h1>
-      <p class="text-muted">
+      <h1 class="fw-bold mb-1">
+        Tableau de Bord
+      </h1>
+
+      <p class="text-muted mb-0">
         Consultez et gérez les signalements de votre secteur.
       </p>
     </div>
 
-    <button routerLink="signalement/creer" class="btn btn-primary btn-lg">
+    <button routerLink="signalement/creer" class="btn btn-primary">
       + Nouveau Signalement
     </button>
+
   </div>
 
-  <!-- Recherche + Filtres -->
-  <div class="row mb-4 g-3">
+  <!-- FILTRES -->
+  <div class="mb-4">
 
-    <div class="col-md-5">
+    <div class="d-flex flex-wrap gap-2">
 
-      <div class="d-flex gap-2">
-        <button class="btn btn-outline-dark" (click)="filtrerParCategorie('')">Tout</button>
-        <button class="btn btn-outline-secondary" (click)="filtrerParCategorie('Voirie')">Voirie</button>
-        <button class="btn btn-outline-warning" (click)="filtrerParCategorie('Électricité')">Électricité</button>
-        <button class="btn btn-outline-success" (click)="filtrerParCategorie('Déchets')">Déchets</button>
-        <button class="btn btn-outline-danger" (click)="filtrerParCategorie('Sécurité')">Sécurité</button>
-        <button class="btn btn-outline-primary" (click)="filtrerParCategorie('Innondation')">Innondation</button>
-      </div>
+      <button class="btn btn-outline-dark" (click)="filtrerParCategorie('')">
+        Tout
+      </button>
+
+      <button class="btn btn-outline-secondary" (click)="filtrerParCategorie('Voirie')">
+        Voirie
+      </button>
+
+      <button class="btn btn-outline-warning" (click)="filtrerParCategorie('Électricité')">
+        Électricité
+      </button>
+
+      <button class="btn btn-outline-success" (click)="filtrerParCategorie('Déchets')">
+        Déchets
+      </button>
+
+      <button class="btn btn-outline-danger" (click)="filtrerParCategorie('Sécurité')">
+        Sécurité
+      </button>
+
+      <button class="btn btn-outline-primary" (click)="filtrerParCategorie('Innondation')">
+        Inondation
+      </button>
+
     </div>
 
   </div>
 
-  <!-- Liste des incidents -->
+  <!-- LISTE DES SIGNALEMENTS -->
   <div class="row g-4">
 
     @for (signalement of signalementsFiltres; track signalement.id) {
-        <div class="col-md-4">
-            <app-carte-signalement [signalement]="signalement" (soutenirEvent)="onSoutenir($event)" (supprimerCard)="onSupprimer($event)"/>
-        </div>
-    }@empty {
-        <div class="col-12">
-            <div class="alert alert-info text-center">
-                Aucun signalement trouvé.
-            </div>
-        </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+
+      <app-carte-signalement [signalement]="signalement" (soutenirEvent)="onSoutenir($event)" />
+
+    </div>
+
+    } @empty {
+
+    <div class="col-12">
+
+      <div class="alert alert-info text-center shadow-sm">
+        Aucun signalement trouvé.
+      </div>
+
+    </div>
+
     }
 
   </div>

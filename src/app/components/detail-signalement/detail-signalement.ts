@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { Signalement, SignalementService } from '../../services/signalement.service';
 import { NgClass } from '@angular/common';
 
@@ -12,6 +12,7 @@ import { NgClass } from '@angular/common';
 export class DetailSignalement implements OnInit {
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private signalementService: SignalementService,
   ) {}
 
@@ -27,6 +28,15 @@ export class DetailSignalement implements OnInit {
     if (!this.signalementDetail) return;
 
     this.signalementService.incrementerVotes(this.signalementDetail.id);
+  }
+
+  supprimer(): void{
+    const confirmer = confirm("Etes-vous sur de vouloir supprimer cet signalement ?")
+    if (confirmer) {
+      this.signalementService.supprimerSignalement(this.signalementDetail?.id!)
+      this.router.navigate(['/']);
+    }
+    return
   }
 
   getCategorieClass(): string {

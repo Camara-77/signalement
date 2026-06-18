@@ -30,7 +30,7 @@
     </p>
 
     <p class="card-text text-secondary small">
-      {{ signalement.description }}
+      {{ signalement.description | slice:0:50}}
     </p>
 
   </div>
@@ -43,7 +43,6 @@
     </span>
 
     <div class="d-flex gap-2">
-      <button class="btn btn-outline-danger btn-sm" (click)="supprimer()">Supprimer</button>
       <button [routerLink]="['/signalement/detail/', signalement.id]" class="btn btn-outline-dark btn-sm">
         Détails
       </button>

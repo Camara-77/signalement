@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Signalement } from '../../services/signalement.service';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass, SlicePipe } from '@angular/common';
 import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-carte-signalement',
-  imports: [NgClass, RouterLink],
+  imports: [NgClass, RouterLink, SlicePipe],
   templateUrl: './carte-signalement.html',
   styleUrl: './carte-signalement.css',
 })
@@ -14,15 +14,11 @@ export class CarteSignalement {
   // L'enfant déclare qu'il peut émettre un événement nommé "soutenirEvent"
   // <number> = la donnée transmise sera l'id du signalement concerné
   @Output() soutenirEvent = new EventEmitter<number>();
-  @Output() supprimerCard = new EventEmitter<number>()
+  // @Output() supprimerCard = new EventEmitter<number>()
 
-   supprimer(): void{
-    this.supprimerCard.emit(this.signalement.id)
-  }
 
   onClicSoutenir(): void {
     // L'enfant émet juste l'événement avec l'id concerné
-
     this.soutenirEvent.emit(this.signalement.id);
   }
 

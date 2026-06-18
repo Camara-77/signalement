@@ -93,13 +93,8 @@ La persistance des données est assurée par le **`localStorage`** du navigateur
 
 - **Dépôt GitHub** : [https://github.com/Camara-77/signalement](https://github.com/Camara-77/signalement)
 - **Application en ligne** : *à compléter après déploiement (Vercel ou Netlify)*
-- **Vidéo de démonstration** : *à compléter*
 
 ## 8. Equipe
 - Aliou DIALLO
 - Aissatou Combe CAMARA
 - Fatoumata DRAME
-
-## 9. Wireframe
-
-*Insérer ici une image ou un schéma simple des 3 pages principales (liste, formulaire, détail).*
