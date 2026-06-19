@@ -78,7 +78,7 @@ export class Formulaire {
       id: Date.now(),
       ...this.signalementForm.value,
       votes: 0,
-      date: new Date().toDateString()
+      date: new Date()
     };
 
     this.signalementService.addSignalement(nouveauSignal);

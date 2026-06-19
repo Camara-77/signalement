@@ -5,7 +5,7 @@ import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-carte-signalement',
-  imports: [NgClass, RouterLink, SlicePipe],
+  imports: [NgClass, RouterLink, SlicePipe, DatePipe],
   templateUrl: './carte-signalement.html',
   styleUrl: './carte-signalement.css',
 })
